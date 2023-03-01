@@ -1,11 +1,13 @@
-from tkinter import Tk,Button,Frame,messagebox
+from tkinter import Tk,Button,Frame,messagebox,simpledialog
 
 #5. agregar funcion de mensaje
 def mostarmensaje():
     messagebox.showinfo("Informacion","Te informo que todo fallo con exito")
     messagebox.showerror("Error","Perdon te falle!!")
     print(messagebox.askokcancel("Pregunta"," Seguro que quieres guardar algo"))
-
+    respuesta= simpledialog.askstring("Pregunta:","¿Cual es tu nombre?")
+    print(respuesta)
+    
 #6.Funcion agregar Botones 
 def agregarBoton():
     botonVerde.config(text="+",bg="green",fg="white")
