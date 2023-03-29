@@ -38,8 +38,7 @@ class controladorBD:
             conx.commit()
             conx.close
             messagebox.showinfo("Exito", "Usuario guardado")
-            
-            
+                  
     def encriptarContra(self,con):
         
         # 1.preparamos la contraseña y  la sal  para Hash
@@ -53,3 +52,28 @@ class controladorBD:
         
         # regresamos la contraseña encriptada
         return conHa
+    
+    def consultarUsuario(self,id):
+        
+        #1. realizar conexion BD
+        conx= self.conexionBD()
+        
+        #2.vericar que el id Vacio
+        if(id == ""):
+            messagebox.showwarning("Cuidado","Escribe un Identificador")
+            conx.close()
+        else:
+            #3. proceder a  la consulta
+            try:
+                #4.preparamos lo necesario
+                cursor= conx.cursor()
+                sqlSelect= "select * from tbRegsitrados where id= "+id
+                
+                #5. Ejecutamos,Guardamos la consulta y cerramos conexion
+                cursor.execute(sqlSelect)
+                RSusuario=cursor.fetchall()
+                conx.close()
+                return RSusuario
+                
+            except sqlite3.OperationalError:
+                print("Error de consulta")
